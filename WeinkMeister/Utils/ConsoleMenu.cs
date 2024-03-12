@@ -36,6 +36,8 @@
                     break;
                 case ConsoleKey.Enter:
                     return selectedOptionIndex;
+                case ConsoleKey.Q:
+                    return -1;
             }
         } while (key.Key != ConsoleKey.Escape && key.Key != ConsoleKey.Enter);
 

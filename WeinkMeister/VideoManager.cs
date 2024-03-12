@@ -55,12 +55,12 @@ namespace RandomVideo
             ignoreList = JsonManager.ReadList(configManager.config.IgnoreFile);
             videoList = JsonManager.ReadVideoInfo(configManager.config.VideoFile);
             welcomeMessage =
-                "Basic usage:\n" +
+                "Basic usage while the video is open:\n" +
                 "CTRL + A: Add to Favourites list\n" +
                 "CTRL + Z: Add to Best list\n" +
                 "CTRL + W: Add to Ignore list. These videos \n" +
                 "CTRL + Q: Close the video and return to menu\n" +
-
+                "Q: Close the video and open a new random one\n" +
                 "Please select what you want to be played"
                 ;
             if (videoList.Count == 0)
@@ -149,6 +149,7 @@ namespace RandomVideo
         {
             configManager = new ConfigurationManager(configFile);
             configManager.LoadConfig();
+            
         }
         public void SaveConfig()
         {
@@ -278,7 +279,8 @@ namespace RandomVideo
             List<string> videoFiles = GetVideoList(configManager.config.Folders);
             if (videoFiles.Count <= 0)
             {
-                throw new Exception("The video file must be loaded");
+                Console.WriteLine("The video file must be loaded and not empty");
+                return;
             }
             else
             {
@@ -595,7 +597,7 @@ namespace RandomVideo
             psi.FileName = vlcPath;
             psi.Arguments = "file:///" + Uri.EscapeDataString(selectedVideo.VideoPath); // Enclose path in quotes to handle spaces
             randomVideoName = selectedVideo.VideoPath;
-            if (configManager.config.Fullscreen)
+            if ((bool)configManager.config.Fullscreen)
             {
                 psi.Arguments += " --fullscreen"; // Add fullscreen argument
             }

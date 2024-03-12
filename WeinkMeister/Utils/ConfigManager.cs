@@ -31,8 +31,23 @@ public class ConfigurationManager
         else
         {
             Console.WriteLine("Config file not found.");
-            //throw new FileNotFoundException();
-            config = new Config();
+            throw new FileNotFoundException();
+        }
+
+
+        if(null == config.Folders || config.Folders.Count == 0)
+        {
+            Console.WriteLine("You must specify at least one folder.");
+            throw new InvalidDataException();
+        }
+
+        if (null == config.WorkingFolder)
+        {
+            config.WorkingFolder = Directory.GetCurrentDirectory();
+        }
+        if (null == config.Fullscreen)
+        {
+            config.Fullscreen = true;
         }
     }
 
@@ -63,7 +78,7 @@ public class Config
     public string FavFile { get; set; }
     public string BestFile { get; set; }
     public string IgnoreFile { get; set; }
-    public bool Fullscreen { get; set; }
+    public bool? Fullscreen { get; set; }
     public string VideoFile { get; set; }
 
     public RandomTypeEnum RType;
