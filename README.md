@@ -6,7 +6,12 @@ Using the random by duration will give more weight to longer videos during the s
 
 Two lists of videos will be managed: Favourites and Best. Once a video is playing, you can add it to either lists through keyboard shortcuts.
 
-# Usage
+## Dependencies
+Requires an installation of VLC: It will look for your VLC installation in the path, the registry and in the following folders: "C:\Program Files\VideoLAN\VLC\vlc.exe" and "C:\Program Files (x86)\VideoLAN\VLC\vlc.exe".
+
+If you would like another player supported, let me know.
+
+## Usage
 
 Simply rename the config.json.example to config.json and add your video folder. It will look recursively for all videos in that folder. Here's a detailed list of options:
 
